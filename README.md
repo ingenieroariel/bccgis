@@ -56,3 +56,10 @@ bangladesh.pbf:
  cd osmosis
  unzip ../osmosis-latest.zip
  ```
+
+  12. Install git and clone the project
+ ```
+ sudo apt-get install git
+ git clone http://github.com/ingenieroariel/bccgis.git
+ ```
+
