@@ -66,23 +66,3 @@ bangladesh.pbf:
  13. Delete your files in the code folder that are not osmosis or bccgis.
 
  14. Move the osmosis folder in the bccgis folder.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
