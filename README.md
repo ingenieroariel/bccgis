@@ -128,5 +128,51 @@ bangladesh.pbf:
  25. Get the first bank
  ```
  SELECT osm_id, name, geom FROM banks LIMIT 1;
+ SELECT osm_id, name, ST_AsEWKT(geom) FROM banks LIMIT 1;
  ```
+
+ 26. Get all the banks that are one kilometer away from BCC
+ ```
+ SELECT * FROM banks 
+  WHERE ST_DWithin(geom, 'POINT(90.374281 23.7784036)', 0.01);
+ ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
