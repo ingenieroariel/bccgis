@@ -89,3 +89,10 @@ bangladesh.pbf:
  ```
  sudo apt-get install postgresql-9.3-postgis-2.1
  ```
+
+ 20. Create bcc database
+ ```
+ sudo su - postgres
+ createuser -s bcc
+ createdb -O bcc bcc
+ ```
