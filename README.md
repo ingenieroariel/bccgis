@@ -83,7 +83,9 @@ bangladesh.pbf:
 
  At this point the computer will start to download the country file for Bangladesh and extract all the important layers one by one. It will take about ten minutes and it is the perfect time to go and have tea.
 
- 18. Let's get a spatial database setup
+ 18. Export banks as an ESRI Shapefile using QGIS. Put it in a folder called export.
+
+ 19. Let's get a spatial database setup
  ```
  sudo apt-get install postgresql-9.3-postgis-2.1
  ```
