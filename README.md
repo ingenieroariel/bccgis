@@ -56,3 +56,33 @@ bangladesh.pbf:
  cd osmosis
  unzip ../osmosis-latest.zip
  ```
+
+ 12. Clone this repository
+ ```
+ sudo apt-get install git
+ git clone https://github.com/ingenieroariel/bccgis.git
+ ``` 
+
+ 13. Delete your files in the code folder that are not osmosis or bccgis.
+
+ 14. Move the osmosis folder in the bccgis folder.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
