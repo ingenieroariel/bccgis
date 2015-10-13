@@ -71,3 +71,15 @@ bangladesh.pbf:
  ```
  git pull
  ```
+
+ 16. To add hospitals and restaurants in QGIS, Click on add layers, then select All Files and locate the pbf you want to open. If you do not know whether it has points, polygons or lines, click on select all, and then delete the layers that are empty.
+
+ 17. To create all the layers ( schools, rivers, restaurants, roads), make sure to do a git pull again and then type:
+
+ ```
+ make clean
+ make
+ ```
+
+ At this point the computer will start to download the country file for Bangladesh and extract all the important layers one by one. It will take about an hour and it is the perfect time to go and have lunch.
+
