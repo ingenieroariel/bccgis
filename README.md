@@ -117,3 +117,16 @@ bangladesh.pbf:
  ```
  psql bcc -f banks.sql
  ```
+
+ 24. Check how many banks are in the database:
+  ```
+ psql bcc
+ SELECT count(*) from banks;
+ \q
+ ```
+
+ 25. Get the first bank
+ ```
+ SELECT osm_id, name, geom FROM banks LIMIT 1;
+ ```
+
