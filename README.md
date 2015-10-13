@@ -81,5 +81,5 @@ bangladesh.pbf:
  make
  ```
 
- At this point the computer will start to download the country file for Bangladesh and extract all the important layers one by one. It will take about an hour and it is the perfect time to go and have lunch.
+ At this point the computer will start to download the country file for Bangladesh and extract all the important layers one by one. It will take about ten minutes and it is the perfect time to go and have tea.
 
