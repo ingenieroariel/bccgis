@@ -1,5 +1,10 @@
 OSMOSIS=osmosis/bin/osmosis
 
+PBF_EXPORTS = buildings.pbf schools_point.pbf schools_polygon.pbf medical_point.pbf medical_polygon.pbf rivers.pbf riverbanks.pbf lakes.pbf farms.pbf forest.pbf grassland.pbf military.pbf orchards.pbf residential.pbf cities.pbf hamlets.pbf neighborhoods.pbf villages.pbf placenames.pbf all_roads.pbf main_roads.pbf paths.pbf tracks.pbf aerodromes_point.pbf aerodromes_polygon.pbf banks.pbf hotels.pbf police_stations.pbf restaurants.pbf train_stations.pbf helipads.pbf
+
+all: $(PBF_EXPORTS)
+	@date
+
 # Get spatial data for Bangladesh.
 bangladesh.pbf:
 	curl -o $@ 'http://download.geofabrik.de/asia/bangladesh-latest.osm.pbf'
@@ -125,9 +130,6 @@ train_stations.pbf: bangladesh.pbf
 helipads.pbf: bangladesh.pbf
 	$(OSMOSIS) --read-pbf-fast file="$<" --wkv keyValueList="aeroway.helipad" --used-node --write-pbf file="$@"
 
-PBF_EXPORTS = buildings.pbf schools_point.pbf schools_polygon.pbf medical_point.pbf medical_polygon.pbf rivers.pbf riverbanks.pbf lakes.pbf farms.pbf forest.pbf grassland.pbf military.pbf orchards.pbf residential.pbf cities.pbf hamlets.pbf neighborhoods.pbf villages.pbf placenames.pbf all_roads.pbf main_roads.pbf paths.pbf tracks.pbf aerodromes_point.pbf aerodromes_polygon.pbf banks.pbf hotels.pbf police_stations.pbf restaurants.pbf train_stations.pbf helipads.pbf
-
-all: $(PBF_EXPORTS)
 
 .PHONY: clean
 clean:
