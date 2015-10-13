@@ -66,3 +66,8 @@ bangladesh.pbf:
  13. Delete your files in the code folder that are not osmosis or bccgis.
 
  14. Move the osmosis folder in the bccgis folder.
+
+ 15. Every time you want to update your local copy, run the following:
+ ```
+ git pull
+ ```
