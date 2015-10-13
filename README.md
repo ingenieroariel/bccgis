@@ -95,4 +95,25 @@ bangladesh.pbf:
  sudo su - postgres
  createuser -s bcc
  createdb -O bcc bcc
+ \q
+ exit
+ ```
+
+ 21. Add postgis and hstore extensions to be able to load spatial data
+ ```
+ psql bcc
+ CREATE EXTENSION postgis;
+ CREATE EXTENSION hstore;
+ \q
+ ```
+
+ 22. Export sql using shp2pgsql
+ ```
+ cd ~/code/bccgis/export
+ shp2pgsql banks.shp >> banks.sql
+ ```
+
+ 23. Load the sql on the database.
+ ```
+ psql bcc -f banks.sql
  ```
