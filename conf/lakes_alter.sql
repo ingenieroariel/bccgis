@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS lakes;
+CREATE TABLE lakes AS SELECT * FROM multipolygons;

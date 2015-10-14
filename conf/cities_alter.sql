@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS cities;
+CREATE TABLE cities AS SELECT * FROM points;

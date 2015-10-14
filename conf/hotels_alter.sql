@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS hotels;
+CREATE TABLE hotels AS SELECT * FROM points;
