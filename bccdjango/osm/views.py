@@ -9,7 +9,7 @@ def index(request):
 def banks(request):
     html = '<html><body>'
     html += '<h1>List of banks</h1>'
-    html += '<ul>'
+    html += '<ol>'
 
     for bank in Bank.objects.all():
         # We do not want to display the banks with no name.
@@ -17,7 +17,7 @@ def banks(request):
             continue
 
         # Add the bank's name and location to the webpage.
-        html += '<li>%s: (%s, %s)</li>' % (bank.name, 0, 0)
+        html += '<li>%s: (%s, %s)</li>' % (bank.name, bank.geom.x, bank.geom.y)
 
-    html += '</ul></body></html>'
+    html += '</ol></body></html>'
     return HttpResponse(html)
