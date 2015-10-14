@@ -188,6 +188,23 @@ bangladesh.pbf:
  sudo apt-get install libpq-dev python-dev
  sudo pip install -U psycopg2 ipython
  ```
+ 35. Use the shell to iterate over bank names:
+
+ ```
+ python manage.py shell
+ from osm.models import Bank
+
+ Bank.objects.all().count()
+
+ for bank in Bank.objects.all():
+     print bank.name, bank.geom.x, bank.geom.y
+ ```
+
+ 36. Install django-leaflet and django-geojson to be able to create a map.
+
+ ```
+ sudo pip install django-leaflet django-geojson
+ ```
 
 
 

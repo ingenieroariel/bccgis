@@ -1,10 +1,29 @@
+
+{% load leaflet_tags %}
+{% load geojson_tags %}
+
 <html>
+ <head>
+  <title>Banks in Bangladesh</title>
+
+  {% leaflet_js %}
+  {% leaflet_css %}
+ </head>
  <body>
   <h1>List of banks</h1>
+   <script type="text/javascript">
+      var collection = {{ object_list|geojsonfeature|safe }};
+      function map_init(map, options) {
+          L.geoJson(collection).addTo(map);
+      }
+    </script>
+
+    {% leaflet_map "spots" callback="window.map_init" %}
   <ol>
    {% for item in object_list %}
    <li>{{item.name}}: ({{item.geom.x}}, {{item.geom.y}})</li>
    {% endfor %}
   </ol>
+
  </body>
 </html>

@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from osm.views import index
 from osm.models import Bank
+from djgeojson.views import GeoJSONLayerView
+
+class BankDetailView(DetailView):
+    model = Bank
 
 urlpatterns = [
     url(r'^$', index),
     url(r'^banks$', ListView.as_view(queryset=Bank.objects.all(), template_name='osm/bank_list.html')),
+    url(r'^banks/?P<id>[-\w]+$', BankDetailView.as_view(template_name='osm/bank_detail.html')),
+    url(r'^banksjson$', GeoJSONLayerView.as_view(model=Bank), name='data'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 
