@@ -1,8 +1,18 @@
 OSMOSIS=osmosis/bin/osmosis
 
-PBF_EXPORTS = buildings.pbf schools_point.pbf schools_polygon.pbf medical_point.pbf medical_polygon.pbf rivers.pbf riverbanks.pbf lakes.pbf farms.pbf forest.pbf grassland.pbf military.pbf orchards.pbf residential.pbf cities.pbf hamlets.pbf neighborhoods.pbf villages.pbf placenames.pbf all_roads.pbf main_roads.pbf paths.pbf tracks.pbf aerodromes_point.pbf aerodromes_polygon.pbf banks.pbf hotels.pbf police_stations.pbf restaurants.pbf train_stations.pbf helipads.pbf
+DB=bcc
 
-all: $(PBF_EXPORTS)
+SQL_EXPORTS = buildings.sql schools_point.sql schools_polygon.sql medical_point.sql medical_polygon.sql rivers.sql riverbanks.sql lakes.sql farms.sql forest.sql grassland.sql military.sql orchards.sql residential.sql cities.sql hamlets.sql neighborhoods.sql villages.sql placenames.sql all_roads.sql main_roads.sql paths.sql tracks.sql aerodromes_point.sql aerodromes_polygon.sql banks.sql hotels.sql police_stations.sql restaurants.sql train_stations.sql helipads.sql
+
+EXPORTS = $(SQL_EXPORTS:.sql=)
+PBF_EXPORTS = $(SQL_EXPORTS:.sql=.pbf)
+POSTGIS_EXPORTS = $(SQL_EXPORTS:.sql=.postgis)
+SQL_ZIP_EXPORTS = $(SQL_EXPORTS:.sql=.sql.zip)
+SHP_ZIP_EXPORTS = $(SQL_EXPORTS:.sql=.shp.zip)
+GEOJSON_EXPORTS = $(SQL_EXPORTS:.sql=.json)
+KML_EXPORTS = $(SQL_EXPORTS:.sql=.kml)
+
+all: $(SQL_EXPORTS)
 	@date
 
 # Get spatial data for Bangladesh.
@@ -130,7 +140,47 @@ train_stations.pbf: bangladesh.pbf
 helipads.pbf: bangladesh.pbf
 	$(OSMOSIS) --read-pbf-fast file="$<" --wkv keyValueList="aeroway.helipad" --used-node --write-pbf file="$@"
 
+%.sql: %.pbf
+	ogr2ogr -f PGDump $@ $< -lco COLUMN_TYPES=other_tags=hstore --config OSM_CONFIG_FILE conf/$(basename $@).ini
+
+%.shp: %.postgis
+	pgsql2shp -f $(basename $@) $(DB) public.$(basename $<)
+
+%.json: %.shp
+	ogr2ogr -f GeoJSON -t_srs crs:84 $@ $<
+
+%.kml: %.shp
+	ogr2ogr -f KML -t_srs crs:84 $@ $<
+
+%.shp.zip: %.shp
+	zip $@ $< $(basename $<).prj  $(basename $<).dbf $(basename $<).shx
+
+%.sql.zip: %.sql
+	zip $@ $<
+
+%.postgis: %.sql
+	psql -f $< $(DB)
+	psql -f conf/$(basename $@)_alter.sql $(DB)
+	psql -f conf/clean.sql -q $(DB)
+
+all: $(PBF_EXPORTS) $(SQL_EXPORTS) $(SQL_ZIP_EXPORTS) $(SHP_ZIP_EXPORTS) $(GEOJSON_EXPORTS) $(KML_EXPORTS) stats.js
+	cp *.pbf $(EXPORT_DIR)
+	cp *.sql.zip $(EXPORT_DIR)
+	cp *.shp.zip $(EXPORT_DIR)
+	cp *.json $(EXPORT_DIR)
+	cp *.kml $(EXPORT_DIR)
+	cp stats.js $(EXPORT_DIR)
+
+postgis: $(POSTGIS_EXPORTS)
 
 .PHONY: clean
 clean:
 	rm -rf *.pbf
+	rm -rf *.zip
+	rm -rf *.sql
+	rm -rf *.shp
+	rm -rf *.dbf
+	rm -rf *.shx
+	rm -rf *.prj
+	rm -rf *.json
+	rm -rf *.kml
