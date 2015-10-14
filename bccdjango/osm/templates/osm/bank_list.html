@@ -1,0 +1,10 @@
+<html>
+ <body>
+  <h1>List of banks</h1>
+  <ol>
+   {% for item in object_list %}
+   <li>{{item.name}}: ({{item.geom.x}}, {{item.geom.y}})</li>
+   {% endfor %}
+  </ol>
+ </body>
+</html>
