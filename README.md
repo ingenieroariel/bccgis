@@ -164,7 +164,14 @@ bangladesh.pbf:
  sudo pip install Django
  ```
 
+ 32. Run the web server on the bccdjango project.
 
+ ```
+ cd bccdjango
+ python manage.py runserver
+ ```
+ Navigate to the web browser in the following url:
+ http://localhost:8000/
 
 
 
