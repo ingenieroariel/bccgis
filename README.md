@@ -165,6 +165,7 @@ bangladesh.pbf:
  ```
 
  32. Run the web server on the bccdjango project.
+ In order to create this application, we ran django-admin startproject bccdjango in the teacher computer and then pushed the results to github.
 
  ```
  cd bccdjango
@@ -174,13 +175,19 @@ bangladesh.pbf:
  http://localhost:8000/
 
  33. Now try to access the list of banks:
+ We used python manage.py inspectdb to create a models.py file with information about banks and other type of layers and created a new app called osm using python manage.py startapp osm.
 
  ```
  git pull
  ``` 
  http://localhost:8000/banks
 
+ 34. Update the postgres python adapter:
 
+ ```
+ sudo apt-get install libpq-dev python-dev
+ sudo pip install -U psycopg2
+ ```
 
 
 
