@@ -173,6 +173,14 @@ bangladesh.pbf:
  Navigate to the web browser in the following url:
  http://localhost:8000/
 
+ 33. Now try to access the list of banks:
+
+ ```
+ git pull
+ ``` 
+ http://localhost:8000/banks
+
+
 
 
 
