@@ -12,9 +12,6 @@ SHP_ZIP_EXPORTS = $(SQL_EXPORTS:.sql=.shp.zip)
 GEOJSON_EXPORTS = $(SQL_EXPORTS:.sql=.json)
 KML_EXPORTS = $(SQL_EXPORTS:.sql=.kml)
 
-all: $(SQL_EXPORTS)
-	@date
-
 # Get spatial data for Bangladesh.
 bangladesh.pbf:
 	curl -o $@ 'http://download.geofabrik.de/asia/bangladesh-latest.osm.pbf'
@@ -163,13 +160,8 @@ helipads.pbf: bangladesh.pbf
 	psql -f conf/$(basename $@)_alter.sql $(DB)
 	psql -f conf/clean.sql -q $(DB)
 
-all: $(PBF_EXPORTS) $(SQL_EXPORTS) $(SQL_ZIP_EXPORTS) $(SHP_ZIP_EXPORTS) $(GEOJSON_EXPORTS) $(KML_EXPORTS) stats.js
-	cp *.pbf $(EXPORT_DIR)
-	cp *.sql.zip $(EXPORT_DIR)
-	cp *.shp.zip $(EXPORT_DIR)
-	cp *.json $(EXPORT_DIR)
-	cp *.kml $(EXPORT_DIR)
-	cp stats.js $(EXPORT_DIR)
+all: $(PBF_EXPORTS) $(SQL_EXPORTS) $(SQL_ZIP_EXPORTS) $(SHP_ZIP_EXPORTS) $(GEOJSON_EXPORTS) $(KML_EXPORTS)
+	@date
 
 postgis: $(POSTGIS_EXPORTS)
 
