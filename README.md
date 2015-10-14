@@ -157,7 +157,12 @@ bangladesh.pbf:
 
  30. Open pgadmin3 from the menu and connect to the server at localhost. Open the bcc database and navigate to the list of tables in the public schema until you see the bank table. Right click on that table and click on View Data -> View Top 100 Rows.
 
+ 31. Install python-pip before you can install Django
 
+ ```
+ sudo apt-get install python-pip
+ sudo pip install Django
+ ```
 
 
 
