@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from osm.views import index, banks
+from django.views.generic import ListView
+from osm.views import index
+from osm.models import Bank
 
 urlpatterns = [
     url(r'^$', index),
-    url(r'^banks$', banks),
+    url(r'^banks$', ListView.as_view(queryset=Bank.objects.all(), template_name='osm/bank_list.html')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 
