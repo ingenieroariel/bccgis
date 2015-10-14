@@ -1,1 +1,5 @@
 *.pbf
+*.pyc
+*~
+
+db.sqlite3
