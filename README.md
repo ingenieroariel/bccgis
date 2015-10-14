@@ -126,19 +126,36 @@ bangladesh.pbf:
  ```
 
  25. Get the first bank
+
  ```
  SELECT osm_id, name, geom FROM banks LIMIT 1;
  SELECT osm_id, name, ST_AsEWKT(geom) FROM banks LIMIT 1;
  ```
 
  26. Get all the banks that are one kilometer away from BCC
+
  ```
  SELECT * FROM banks 
   WHERE ST_DWithin(geom, 'POINT(90.374281 23.7784036)', 0.01);
  ```
 
+ 27. Update your code, and run make all to insert all the different tables in the database.
 
+ 28. Install pgadmin3 to access your database with a handy UI.
 
+ ```
+ sudo apt-get install pgadmin3
+ ```
+ 
+ 29. Set a password for the bcc user.
+
+ ```
+ psql bcc
+ ALTER ROLE bcc WITH PASSWORD 'bcc';
+ \q
+ ```
+
+ 30. Open pgadmin3 from the menu and connect to the server at localhost. Open the bcc database and navigate to the list of tables in the public schema until you see the bank table. Right click on that table and click on View Data -> View Top 100 Rows.
 
 
 
